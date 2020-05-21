@@ -1,8 +1,7 @@
 # Nack
 Nack keyboard - still very much a **_work-in-progress_**
 
-Here's a small taste:
-
+Powered by [**QMK**](firmware), here is a sneak peek:
 
 ![Nack_front](screenshots/Nack_front.jpg "Nack front");
 
