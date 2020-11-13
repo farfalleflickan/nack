@@ -1,8 +1,8 @@
-# Nack
-Nack keyboard - still very much a **_work-in-progress_**
+# nack
+nack keyboard - still very much a **_work-in-progress_**
 
 Powered by [**QMK**](https://github.com/pastapojken/qmk_firmware), here is a sneak peek:
 
-![Nack_front](screenshots/Nack_front.jpg "Nack front")
+![nack_front](screenshots/Nack_front.jpg "nack front")
 
-![Nack_back](screenshots/Nack_back.jpg "Nack back")
+![nack_back](screenshots/Nack_back.jpg "nack back")
