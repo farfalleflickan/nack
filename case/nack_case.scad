@@ -1,5 +1,8 @@
 /*
- * Excuse this mess, work-in-progress
+ * Excuse this mess, first real 3D model I've designed :)
+ *
+ * Screws used in this: 1.8mm*6mm
+ * https://lcsc.com/product-detail/Screw_Shuntian-KA1-8X6_C357445.html
 */
 keyWidth=19.05;
 holeSize=14;
@@ -14,7 +17,7 @@ paddingLeft = 1;
 
 kbWidth=13*keyWidth;
 kbHeight=4*keyWidth;
-kbThickness=4.2;
+topPlateThickness=4.2;
 
 nack = [
     //start column 0
@@ -92,13 +95,13 @@ module holematrix(holes,startx,starty){
 		translate([startx+keyWidth*key[0][0], starty-keyWidth*key[0][1], -0.05])
 		translate([(keyWidth*key[1]-holeSize)/2,(keyWidth - holeSize)/2, -0.05])
 		union(){
-            cube([holeSize,holeSize,kbThickness+1]);
+            cube([holeSize,holeSize,topPlateThickness+1]);
 
             translate([-cutoutWidth,1,-0.05])
-            cube([holeSize+2*cutoutWidth,cutoutHeight,kbThickness+1]);
+            cube([holeSize+2*cutoutWidth,cutoutHeight,topPlateThickness+1]);
 
             translate([-cutoutWidth,holeSize-cutoutWidth-cutoutHeight,-0.05])
-            cube([holeSize+2*cutoutWidth,cutoutHeight,kbThickness+1]);
+            cube([holeSize+2*cutoutWidth,cutoutHeight,topPlateThickness+1]);
         }
 	}
 }
@@ -108,16 +111,16 @@ module top_plate(){
         difference() {
             union (){
                 difference(){
-                    cube([kbWidth+paddingRight,kbHeight+paddingTop, kbThickness]);
+                    cube([kbWidth+paddingRight,kbHeight+paddingTop, topPlateThickness]);
                     holematrix(nack,0,kbHeight-keyWidth);
                 }
                 translate([0,kbHeight+paddingTop-0.5,0]){
                     difference(){     
-                        cube([kbWidth+paddingRight, 11, kbThickness]); // TOP lip
+                        cube([kbWidth+paddingRight, 11, topPlateThickness]); // TOP lip
                         translate([10,0,-0.05]) 
-                        cube([20, 10.5, kbThickness-1.5]);
+                        cube([20, 10.5, topPlateThickness-1.5]);
                         translate([95,0,-0.05]) 
-                        cube([50, 10.5, kbThickness-1.5]); // speaker "insert"
+                        cube([50, 10.5, topPlateThickness-1.5]); // speaker "insert"
                         // speaker "grill"        
                         // reset button
                         translate([21,7,-0.05])
@@ -131,35 +134,35 @@ module top_plate(){
             translate([keyWidth*2.55,keyWidth*3,-0.05])
             cylinder(h=2.5,d=1.8,center=false,$fn=20);    
             
-            translate([keyWidth*5.05,keyWidth*1.9,-0.05])
+            translate([keyWidth*5.05,keyWidth*1.92,-0.05])
             cylinder(h=2.5,d=1.8,center=false,$fn=20);
-            translate([keyWidth*8.05,keyWidth*1.9,-0.05])
+            translate([keyWidth*8.05,keyWidth*1.92,-0.05])
             cylinder(h=2.5,d=1.8,center=false,$fn=20);
             
             translate([keyWidth*10.55,keyWidth,-0.05])
             cylinder(h=2.5,d=1.8,center=false,$fn=20);
             translate([keyWidth*10.55,keyWidth*3,-0.05])
-            cylinder(h=2.5,d=1.8,center=false,$fn=20); 
+            cylinder(h=2.5,d=1.8,center=false,$fn=20);
         }        
     }
     translate([-1.2,0,-6])
-    cube([1.2, kbHeight+paddingTop+11, kbThickness+6]);  // RIGHT wall
+    cube([1.2, kbHeight+paddingTop+11, topPlateThickness+6]);  // RIGHT wall
     translate([-1.2,-1.2,-6])
-    cube([kbWidth+paddingRight+2.4, 1.2, kbThickness+6]); // BOT wall
+    cube([kbWidth+paddingRight+2.4, 1.2, topPlateThickness+6]); // BOT wall
     translate([kbWidth+paddingRight,0,-6]) 
-    cube([1.2, kbHeight+paddingTop+11, kbThickness+6]); // LEFT wall
+    cube([1.2, kbHeight+paddingTop+11, topPlateThickness+6]); // LEFT wall
     
     difference() { // "USB hole"
         translate([-1.2,kbHeight+paddingTop+10,-6]) 
-        cube([kbWidth+paddingRight+1.2+1.2, 1.2, kbThickness+6]); // TOP wall        
+        cube([kbWidth+paddingRight+1.2+1.2, 1.2, topPlateThickness+6]); // TOP wall        
 
         hull(){ 
-            translate([7,kbHeight+paddingTop+11-2,-6])
+            translate([7,kbHeight+paddingTop+11-2,-7])
             cube([6, 5, 4.6]); 
             
-            translate([7,kbHeight+paddingTop+11-2,-2.4]) 
+            translate([7,kbHeight+paddingTop+11-2,-3.4]) 
             rotate([270,0,0]) cylinder(h=5,d=2,center=false,$fn=50);
-            translate([14,kbHeight+paddingTop+11-2,-2.4]) 
+            translate([14,kbHeight+paddingTop+11-2,-3.4]) 
             rotate([270,0,0]) cylinder(h=5,d=2,center=false,$fn=50);
             translate([7,kbHeight+paddingTop+11-2,-5.8]) 
             rotate([270,0,0]) cylinder(h=5,d=2,center=false,$fn=50);
@@ -173,45 +176,65 @@ module top_plate(){
 
 module bot_plate(){
     difference(){    
-        screw_post_height=4;
+        screwPostHeight=4;
         union(){
+            // Screw posts start
             translate([keyWidth*2.55,keyWidth,1]){
-                cylinder(h=screw_post_height,d=5.2,center=false,$fn=20);
+                cylinder(h=screwPostHeight,d=5.2,center=false,$fn=20);
                 cylinder(h=2,d1=8,d2=0,center=false,$fn=20);
             }
             translate([keyWidth*2.55,keyWidth*3,1]){
-                cylinder(h=screw_post_height,d=5.2,center=false,$fn=20);
+                cylinder(h=screwPostHeight,d=5.2,center=false,$fn=20);
                 cylinder(h=2,d1=8,d2=0,center=false,$fn=20);
             }
             translate([keyWidth*10.55,keyWidth,1]){
-                cylinder(h=screw_post_height,d=5.2,center=false,$fn=20);
+                cylinder(h=screwPostHeight,d=5.2,center=false,$fn=20);
                 cylinder(h=2,d1=8,d2=0,center=false,$fn=20);
             }
             translate([keyWidth*10.55,keyWidth*3,1]){
-                cylinder(h=screw_post_height,d=5.2,center=false,$fn=20);
+                cylinder(h=screwPostHeight,d=5.2,center=false,$fn=20);
                 cylinder(h=2,d1=8,d2=0,center=false,$fn=20);
             }
-            cube([kbWidth+paddingRight+1,kbHeight+paddingTop, 1]); // body
+            translate([keyWidth*5.05,keyWidth*1.92,1]){
+                cylinder(h=screwPostHeight,d=5.2,center=false,$fn=20);
+                cylinder(h=2,d1=8,d2=0,center=false,$fn=20);
+            }
+            translate([keyWidth*8.05,keyWidth*1.92,1]){
+                cylinder(h=screwPostHeight,d=5.2,center=false,$fn=20);
+                cylinder(h=2,d1=8,d2=0,center=false,$fn=20);
+            }
+            // Body
+            cube([kbWidth+paddingRight+1,kbHeight+paddingTop, 1]);
+             // Top lip
             translate([0,kbHeight+paddingTop,0]){
-                cube([kbWidth+paddingRight+1, 11, 1]); // top lip
+                cube([kbWidth+paddingRight+1, 11, 1]);
             }
         }
+        screwPostThickness=0.4;
         translate([keyWidth*2.55,keyWidth,-0.05]){
-            cylinder(h=screw_post_height+0.8,d=3.6,center=false,$fn=20);
-            cylinder(h=screw_post_height+1.6,d=1.8,center=false,$fn=20);
+            cylinder(h=screwPostHeight+screwPostThickness,d=3.6,center=false,$fn=20);
+            cylinder(h=screwPostHeight+2,d=1.8,center=false,$fn=20);
         }
         translate([keyWidth*2.55,keyWidth*3,-0.05]){
-            cylinder(h=screw_post_height+0.8,d=3.6,center=false,$fn=20);
-            cylinder(h=screw_post_height+1.6,d=1.8,center=false,$fn=20);
+            cylinder(h=screwPostHeight+screwPostThickness,d=3.6,center=false,$fn=20);
+            cylinder(h=screwPostHeight+2,d=1.8,center=false,$fn=20);
         }
         translate([keyWidth*10.55,keyWidth,-0.05]){
-            cylinder(h=screw_post_height+0.8,d=3.6,center=false,$fn=20);
-            cylinder(h=screw_post_height+1.6,d=1.8,center=false,$fn=20);
+            cylinder(h=screwPostHeight+screwPostThickness,d=3.6,center=false,$fn=20);
+            cylinder(h=screwPostHeight+2,d=1.8,center=false,$fn=20);
         }
         translate([keyWidth*10.55,keyWidth*3,-0.05]){
-            cylinder(h=screw_post_height+0.8,d=3.6,center=false,$fn=20);
-            cylinder(h=screw_post_height+1.6,d=1.8,center=false,$fn=20);
+            cylinder(h=screwPostHeight+screwPostThickness,d=3.6,center=false,$fn=20);
+            cylinder(h=screwPostHeight+2,d=1.8,center=false,$fn=20);
         }
+        translate([keyWidth*5.05,keyWidth*1.92,-0.05]){
+            cylinder(h=screwPostHeight+screwPostThickness,d=3.6,center=false,$fn=20);
+            cylinder(h=screwPostHeight+2,d=1.8,center=false,$fn=20);
+        }
+        translate([keyWidth*8.05,keyWidth*1.92,-0.05]){
+            cylinder(h=screwPostHeight+screwPostThickness,d=3.6,center=false,$fn=20);
+            cylinder(h=screwPostHeight+2,d=1.8,center=false,$fn=20);
+        }                
     }
 
     translate([0,-1,0])
@@ -222,5 +245,4 @@ module bot_plate(){
 
 
 bot_plate();
-translate([0, 0, 10]) 
-top_plate();
+//translate([0, 0, 10]) top_plate();
