@@ -18,6 +18,7 @@ paddingLeft = 1;
 kbWidth=13*keyWidth;
 kbHeight=4*keyWidth;
 topPlateThickness=4.2;
+botPlateThickness=2;
 
 nack = [
     //start column 0
@@ -179,68 +180,68 @@ module bot_plate(){
         screwPostHeight=4;
         union(){
             // Screw posts start
-            translate([keyWidth*2.55,keyWidth,1]){
+            translate([keyWidth*2.55,keyWidth,botPlateThickness]){
                 cylinder(h=screwPostHeight,d=5.2,center=false,$fn=20);
                 cylinder(h=2,d1=8,d2=0,center=false,$fn=20);
             }
-            translate([keyWidth*2.55,keyWidth*3,1]){
+            translate([keyWidth*2.55,keyWidth*3,botPlateThickness]){
                 cylinder(h=screwPostHeight,d=5.2,center=false,$fn=20);
                 cylinder(h=2,d1=8,d2=0,center=false,$fn=20);
             }
-            translate([keyWidth*10.55,keyWidth,1]){
+            translate([keyWidth*10.55,keyWidth,botPlateThickness]){
                 cylinder(h=screwPostHeight,d=5.2,center=false,$fn=20);
                 cylinder(h=2,d1=8,d2=0,center=false,$fn=20);
             }
-            translate([keyWidth*10.55,keyWidth*3,1]){
+            translate([keyWidth*10.55,keyWidth*3,botPlateThickness]){
                 cylinder(h=screwPostHeight,d=5.2,center=false,$fn=20);
                 cylinder(h=2,d1=8,d2=0,center=false,$fn=20);
             }
-            translate([keyWidth*5.05,keyWidth*1.92,1]){
+            translate([keyWidth*5.05,keyWidth*1.92,botPlateThickness]){
                 cylinder(h=screwPostHeight,d=5.2,center=false,$fn=20);
                 cylinder(h=2,d1=8,d2=0,center=false,$fn=20);
             }
-            translate([keyWidth*8.05,keyWidth*1.92,1]){
+            translate([keyWidth*8.05,keyWidth*1.92,botPlateThickness]){
                 cylinder(h=screwPostHeight,d=5.2,center=false,$fn=20);
                 cylinder(h=2,d1=8,d2=0,center=false,$fn=20);
             }
             // Body
-            cube([kbWidth+paddingRight+1,kbHeight+paddingTop, 1]);
+            cube([kbWidth+paddingRight+1,kbHeight+paddingTop, botPlateThickness]);
              // Top lip
             translate([0,kbHeight+paddingTop,0]){
-                cube([kbWidth+paddingRight+1, 11, 1]);
+                cube([kbWidth+paddingRight+1, 11, botPlateThickness]);
             }
         }
         screwPostThickness=0.4;
         translate([keyWidth*2.55,keyWidth,-0.05]){
             cylinder(h=screwPostHeight+screwPostThickness,d=3.6,center=false,$fn=20);
-            cylinder(h=screwPostHeight+2,d=1.8,center=false,$fn=20);
+            cylinder(h=screwPostHeight+botPlateThickness+1,d=1.8,center=false,$fn=20);
         }
         translate([keyWidth*2.55,keyWidth*3,-0.05]){
             cylinder(h=screwPostHeight+screwPostThickness,d=3.6,center=false,$fn=20);
-            cylinder(h=screwPostHeight+2,d=1.8,center=false,$fn=20);
+            cylinder(h=screwPostHeight+botPlateThickness+1,d=1.8,center=false,$fn=20);
         }
         translate([keyWidth*10.55,keyWidth,-0.05]){
             cylinder(h=screwPostHeight+screwPostThickness,d=3.6,center=false,$fn=20);
-            cylinder(h=screwPostHeight+2,d=1.8,center=false,$fn=20);
+            cylinder(h=screwPostHeight+botPlateThickness+1,d=1.8,center=false,$fn=20);
         }
         translate([keyWidth*10.55,keyWidth*3,-0.05]){
             cylinder(h=screwPostHeight+screwPostThickness,d=3.6,center=false,$fn=20);
-            cylinder(h=screwPostHeight+2,d=1.8,center=false,$fn=20);
+            cylinder(h=screwPostHeight+botPlateThickness+1,d=1.8,center=false,$fn=20);
         }
         translate([keyWidth*5.05,keyWidth*1.92,-0.05]){
             cylinder(h=screwPostHeight+screwPostThickness,d=3.6,center=false,$fn=20);
-            cylinder(h=screwPostHeight+2,d=1.8,center=false,$fn=20);
+            cylinder(h=screwPostHeight+botPlateThickness+1,d=1.8,center=false,$fn=20);
         }
         translate([keyWidth*8.05,keyWidth*1.92,-0.05]){
             cylinder(h=screwPostHeight+screwPostThickness,d=3.6,center=false,$fn=20);
-            cylinder(h=screwPostHeight+2,d=1.8,center=false,$fn=20);
+            cylinder(h=screwPostHeight+botPlateThickness+1,d=1.8,center=false,$fn=20);
         }                
     }
 
     translate([0,-1,0])
-    cube([kbWidth+paddingRight+1, 1, 1]); // bottom lip
+    cube([kbWidth+paddingRight+1, 1, botPlateThickness]); // bottom lip
     translate([-1,-1,0])
-    cube([1, kbHeight+paddingTop+11+1, 1]); // bottom lip
+    cube([1, kbHeight+paddingTop+11+1, botPlateThickness]); // bottom lip
 }
 
 
